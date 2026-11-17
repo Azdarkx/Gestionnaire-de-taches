@@ -1,3 +1,9 @@
+Collaborateur : 
+
+   Moise 
+   Farhan
+   Melkior
+
 # Gestionnaire de tâches
 
 Application web qui permet de créer, modifier, supprimer, filtrer et rechercher des tâches. Les tâches sont sauvegardées dans le navigateur grâce au `localStorage`.

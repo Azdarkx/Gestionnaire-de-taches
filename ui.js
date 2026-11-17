@@ -16,6 +16,14 @@ const mockTasks = [
   }
 ];
 
+const dictionnaire_status = {
+
+    "a-faire": "A faire",
+    "en-cours": "En cours",
+    "terminee": "Terminée",
+    "bloquee": "Bloquée"
+};
+
 const taskList = document.getElementById("taskList");
 const tache = mockTasks[0];
 const carte = document.createElement("div");
@@ -23,8 +31,12 @@ const titre = document.createElement("h3");
 titre.textContent = tache.titre;
 const desc = document.createElement("p");
 desc.textContent = tache.description;
-carte.append(titre, desc);
+const statut = document.createElement("span");
+statut.textContent = dictionnaire_status[tache.statut];
+carte.append(statut, titre, desc);
 taskList.append(carte);
+
+
 
 
 

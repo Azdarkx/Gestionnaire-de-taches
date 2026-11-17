@@ -17,11 +17,16 @@ const mockTasks = [
 ];
 
 const taskList = document.getElementById("taskList");
-
-const premiereTache = mockTasks[0];
+const tache = mockTasks[0];
 const carte = document.createElement("div");
-carte.textContent = premiereTache.titre;
+const titre = document.createElement("h3");
+titre.textContent = tache.titre;
+const desc = document.createElement("p");
+desc.textContent = tache.description;
+carte.append(titre, desc);
 taskList.append(carte);
+
+
 
 
 

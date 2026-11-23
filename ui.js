@@ -18,7 +18,7 @@ const mockTasks = [
 ];
 
 const dictionnaire_statut = {
-  "a-faire": "A faire",
+  "a-faire": "À faire",
   "en-cours": "En cours",
   "terminee": "Terminée",
   "bloquee": "Bloquée"
@@ -31,16 +31,28 @@ const color_statut = {
 };
 
 const taskList = document.getElementById("taskList");
-const tache = mockTasks[0];
-const carte = document.createElement("div");
-const titre = document.createElement("h3");
-titre.textContent = tache.titre;
-const desc = document.createElement("p");
-desc.textContent = tache.description;
-const statut = document.createElement("span");
-statut.classList.add("badge",color_statut[tache.statut]);
+
+function createTaskCard(task){
+
+    const carte = document.createElement("div");
+    const titre = document.createElement("h3");
+    titre.textContent = task.titre;
+    const desc = document.createElement("p");
+    desc.textContent = task.description;
+    const statut = document.createElement("span");
+    statut.classList.add("badge",color_statut[task.statut]);
+    statut.textContent = dictionnaire_statut[task.statut];
+    carte.append(statut, titre, desc);
+    taskList.append(carte);
+
+}
+createTaskCard(mockTasks[0]);
+createTaskCard(mockTasks[1]);
 
 
-statut.textContent = dictionnaire_statut[tache.statut];
-carte.append(statut, titre, desc);
-taskList.append(carte);
+
+
+
+
+
+

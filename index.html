@@ -1,11 +1,267 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!doctype html>
+<html lang="fr">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <meta
+      name="description"
+      content="Maquette d'un gestionnaire de tâches en HTML, Bootstrap et CSS."
+    >
+    <title>Gestionnaire de tâches</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    >
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="dashboard container">
+      <header
+        class="d-flex align-items-end justify-content-between flex-wrap gap-2 mb-4"
+      >
+        <div>
+          <h1 class="page-title mb-1">Mes tâches</h1>
+          <p class="page-subtitle mb-0">
+            Ajoutez, filtrez et suivez l'avancement de vos projets.
+          </p>
+        </div>
+        <p class="task-summary mb-0">6 tâches · 2 terminées</p>
+      </header>
+
+      <div class="task-layout">
+        <aside class="new-task-panel card" aria-labelledby="new-task-title">
+          <div class="card-body">
+            <h2 class="panel-title" id="new-task-title">Nouvelle tâche</h2>
+            <form id="task-form" class="d-flex flex-column" novalidate>
+              <div class="mb-3">
+                <label for="task-title" class="form-label"
+                  >Titre <span class="required">*</span></label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  id="task-title"
+                  name="titre"
+                  placeholder="Ex. : Brancher localStorage"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="task-desc" class="form-label">Description</label>
+                <textarea
+                  class="form-control task-description"
+                  id="task-desc"
+                  name="description"
+                  rows="3"
+                  placeholder="Détails, étapes, liens utiles..."
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="task-status" class="form-label">Statut</label>
+                <select class="form-select" id="task-status" name="statut">
+                  <option value="todo">À faire</option>
+                  <option value="progress">En cours</option>
+                  <option value="done">Terminée</option>
+                  <option value="blocked">Bloquée</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-add w-100">
+                Ajouter la tâche
+              </button>
+              <small class="required-note">* Champ obligatoire</small>
+            </form>
+          </div>
+        </aside>
+        <section class="tasks-panel" aria-label="Liste et recherche des tâches">
+          <div class="search-area mb-2">
+            <label class="form-label" for="search-input">Rechercher</label>
+            <div class="search-field">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-4-4"></path>
+              </svg>
+              <input
+                type="search"
+                class="form-control"
+                id="search-input"
+                placeholder="Titre ou description..."
+                aria-label="Rechercher une tâche"
+              />
+            </div>
+          </div>
+          <div
+            id="status-filter"
+            class="filters d-flex flex-wrap gap-2 mb-3"
+            role="group"
+            aria-label="Filtres de statut, présentation statique"
+          >
+            <button
+              type="button"
+              class="filter-btn is-active"
+              data-status="all"
+              aria-pressed="true"
+            >
+              Toutes · 6
+            </button>
+            <button
+              type="button"
+              class="filter-btn"
+              data-status="todo"
+              aria-pressed="false"
+            >
+              À faire · 2
+            </button>
+            <button
+              type="button"
+              class="filter-btn"
+              data-status="progress"
+              aria-pressed="false"
+            >
+              En cours · 1
+            </button>
+            <button
+              type="button"
+              class="filter-btn"
+              data-status="done"
+              aria-pressed="false"
+            >
+              Terminées · 2
+            </button>
+            <button
+              type="button"
+              class="filter-btn"
+              data-status="blocked"
+              aria-pressed="false"
+            >
+              Bloquées · 1
+            </button>
+          </div>
+          <div id="task-list" class="task-cards">
+            <article class="task-card status-done">
+              <div
+                class="task-card-top d-flex align-items-center justify-content-between gap-2"
+              >
+                <span class="status-chip chip-done"
+                  ><span class="status-dot"></span> Terminée</span
+                >
+                <time datetime="2026-11-10">10/11/2026</time>
+              </div>
+              <h3>Créer le dépôt GitHub</h3>
+              <p>
+                Initialiser le dépôt, inviter le binôme et créer une branche par
+                personne.
+              </p>
+              <div class="task-card-actions d-flex gap-2 mt-auto">
+                <button type="button" class="btn btn-edit">Modifier</button>
+                <button type="button" class="btn btn-delete">Supprimer</button>
+              </div>
+            </article>
+            <article class="task-card status-done">
+              <div
+                class="task-card-top d-flex align-items-center justify-content-between gap-2"
+              >
+                <span class="status-chip chip-done"
+                  ><span class="status-dot"></span> Terminé</span
+                >
+                <time datetime="2026-11-11">11/11/2026</time>
+              </div>
+              <h3>Structurer le HTML</h3>
+              <p>
+                Formulaire avec labels, zone de recherche, filtres et conteneur
+                des cartes.
+              </p>
+              <div class="task-card-actions d-flex gap-2 mt-auto">
+                <button type="button" class="btn btn-edit">Modifier</button>
+                <button type="button" class="btn btn-delete">Supprimer</button>
+              </div>
+            </article>
+            <article class="task-card status-progress">
+              <div
+                class="task-card-top d-flex align-items-center justify-content-between gap-2"
+              >
+                <span class="status-chip chip-progress"
+                  ><span class="status-dot"></span> En cours</span
+                >
+                <time datetime="2026-11-13">13/11/2026</time>
+              </div>
+              <h3>Écrire les fonctions CRUD</h3>
+              <p>
+                addTask, updateTask et deleteTask avec validation du titre et du
+                statut.
+              </p>
+              <div class="task-card-actions d-flex gap-2 mt-auto">
+                <button type="button" class="btn btn-edit">Modifier</button>
+                <button type="button" class="btn btn-delete">Supprimer</button>
+              </div>
+            </article>
+            <article class="task-card status-todo">
+              <div
+                class="task-card-top d-flex align-items-center justify-content-between gap-2"
+              >
+                <span class="status-chip chip-todo"
+                  ><span class="status-dot"></span> À faire</span
+                >
+                <time datetime="2026-11-14">14/11/2026</time>
+              </div>
+              <h3>Brancher localStorage</h3>
+              <p>
+                Sauvegarder avec JSON.stringify et recharger avec JSON.parse à
+                l’ouverture.
+              </p>
+              <div class="task-card-actions d-flex gap-2 mt-auto">
+                <button type="button" class="btn btn-edit">Modifier</button>
+                <button type="button" class="btn btn-delete">Supprimer</button>
+              </div>
+            </article>
+            <article class="task-card status-todo">
+              <div
+                class="task-card-top d-flex align-items-center justify-content-between gap-2"
+              >
+                <span class="status-chip chip-todo"
+                  ><span class="status-dot"></span> À faire</span
+                >
+                <time datetime="2026-11-15">15/11/2026</time>
+              </div>
+              <h3>Rédiger le README</h3>
+              <p>Présentation du projet, lancement, répartition des rôles.</p>
+              <div class="task-card-actions d-flex gap-2 mt-auto">
+                <button type="button" class="btn btn-edit">Modifier</button>
+                <button type="button" class="btn btn-delete">Supprimer</button>
+              </div>
+            </article>
+            <article class="task-card status-blocked">
+              <div
+                class="task-card-top d-flex align-items-center justify-content-between gap-2"
+              >
+                <span class="status-chip chip-blocked"
+                  ><span class="status-dot"></span> Bloquée</span
+                >
+                <time datetime="2026-11-16">16/11/2026</time>
+              </div>
+              <h3>Relire la Pull Request</h3>
+              <p>
+                En attente du push de la branche feature/crud par le binôme.
+              </p>
+              <div class="task-card-actions d-flex gap-2 mt-auto">
+                <button type="button" class="btn btn-edit">Modifier</button>
+                <button type="button" class="btn btn-delete">Supprimer</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>
